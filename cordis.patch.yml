@@ -1,0 +1,49 @@
+# dsh-win-notify — bundle patch layer
+#
+# Applied when a profile lists this package in dsh.profile.bundles.
+#
+# ⚠️ 本文件是「对外默认值（发行面）」，只放默认值与注释。
+#    你自己的个性化覆盖请写进 profile 的 cordis.patch.yml（不要改这里，改了会被升级覆盖）。
+#    这里的值会覆盖 index.mjs 的 DEFAULTS（运行时是 { ...DEFAULTS, ...config }），
+#    因此**改动 index.mjs 的 DEFAULTS 后必须同步本文件**，否则两处默认值会漂移。
+#
+# Configuration (all optional; defaults shown):
+#   mode: auto          # auto = 前台正在看 DSH 页面时不弹; always = 总弹; never = 不弹
+#   turns: true         # 对话回合完成通知
+#   subagents: true     # 子代理完成通知
+#   jobs: true          # 后台任务(job)完成通知
+#   questions: true     # 模型提问等你回答（user-questions/request）通知
+#   approvals: true     # 工具审批等你决定（approval/request）通知
+#   sound: true         # Windows 提示音（系统具名音，按事件区分；不支持自定义 wav/mp3）
+#   port: 0             # 0 = 自动取运行时端口 ctx.webServer.port（推荐）；
+#                       # 自动取不到时才回退 3080；显式填端口则覆盖。
+#                       # 注意：DSH 端口不固定（port: 0 时由 OS 分配），
+#                       # 写死任何端口都会让大部分用户的「点击通知」开错页。
+#   minIntervalMs: 3000 # 全局速率配额：相邻两条通知的最小间隔毫秒（0 = 不限）
+#   ratePerMinute: 20   # 全局速率配额：每分钟最多发几条（0 = 不限）
+#   quietHours: ""      # 免打扰时段，如 "23:00-07:30"（支持跨午夜）或
+#                       # "09:00-12:00,14:00-18:00"（多段，逗号分隔）；空 = 关闭
+#   quietUrgent: true   # 免打扰时段内仍然放行紧急事件（提问 / 审批）
+#   desktopRaise: true  # Desktop 下点击通知抬窗（dsh://open）而非开浏览器
+#   questionPreviewChars: 120  # 提问正文预览长度
+#   questionOptions: 3  # 选项预览个数（0 = 不显示选项）
+#   icon: ""            # 通知插图（png/jpg/gif 绝对路径）；空 = 内置 DSH 鲸鱼图
+- insert:
+    - id: dsh-win-notify
+      name: "@zhang-tod/dsh-win-notify"
+      config:
+        mode: auto
+        turns: true
+        subagents: true
+        jobs: true
+        questions: true
+        approvals: true
+        sound: true
+        port: 0
+        minIntervalMs: 3000
+        ratePerMinute: 20
+        quietHours: ""
+        quietUrgent: true
+        desktopRaise: true
+        questionPreviewChars: 120
+        questionOptions: 3

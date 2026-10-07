@@ -1,0 +1,50 @@
+{
+  "name": "@zhang-tod/dsh-win-notify",
+  "version": "0.1.0",
+  "description": "DSH Windows native toast notifications: agent turn done, subagent done, background job done (click to open the web UI).",
+  "license": "MIT",
+  "author": "zhang-tod",
+  "type": "module",
+  "main": "index.mjs",
+  "files": [
+    "index.mjs",
+    "cordis.patch.yml",
+    "assets",
+    "CHANGELOG.md"
+  ],
+  "keywords": [
+    "dsh",
+    "deepseek",
+    "deepseek-harness",
+    "cordis",
+    "cordis-plugin",
+    "dsh-plugin",
+    "notification",
+    "toast",
+    "toaster",
+    "windows",
+    "win32",
+    "snoretoast",
+    "desktop-notification",
+    "windows-notification"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhang-tod/dsh-win-notify.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zhang-tod/dsh-win-notify/issues"
+  },
+  "homepage": "https://github.com/zhang-tod/dsh-win-notify#readme",
+  "dependencies": {
+    "node-notifier": "^10.0.1"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
