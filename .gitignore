@@ -4,12 +4,16 @@
 #    直接复用 .gitignore 作为排除规则。因此下面任何一条都不得匹配到
 #    index.mjs / cordis.patch.yml / assets/ / CHANGELOG.md，否则发行包里会缺文件。
 
-# 依赖目录（本地 link 安装产生；实测 212 文件 / 5.74 MB，绝不入库）
+# 依赖目录（pnpm 安装产物：node_modules/.pnpm/ 虚拟 store + Junction 链接；
+# 实测 212 文件 / 5.74 MB，绝不入库）
 node_modules/
 
-# lockfile —— 本仓库实际未用 pnpm 安装过（node_modules 只有 node-notifier 一个包，
-# 而 lockfile 记录了 9 个包），锁定一个未经验证的依赖图对陌生人只是虚假保证。
-# 本包只有一个直接依赖、无子依赖，npm / yarn / pnpm 均可正确安装，无需 lockfile。
+# lockfile —— 本仓库确实存在 pnpm-lock.yaml，且是**真实安装**产生的：
+# node_modules/.pnpm/ 虚拟 store 里的 9 个包与该 lockfile 声明的 9 个包完全一致。
+# 仍不提交，理由属惯例取舍（非正确性问题）：
+#   ① 本插件可被 npm / yarn / pnpm 任选方式安装，消费方以自己的 lockfile 为准；
+#   ② 无 packageManager 字段、无构建步骤、仅 1 个直接依赖，lockfile 对使用者无复现价值；
+#   ③ 与 owner 既有仓库 zhang-tod/dsh-codebuddy（不含 lockfile）惯例一致。
 pnpm-lock.yaml
 
 # 时间戳备份（DSH 改前必备份规范的产物）
